@@ -2,7 +2,7 @@
     Pygments RTF formatter tests
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :copyright: Copyright 2006-2025 by the Pygments team, see AUTHORS.
+    :copyright: Copyright 2006-present by the Pygments team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 """
 
@@ -72,7 +72,7 @@ def test_rtf_header():
     result = format_rtf(t)
     expected = r'{\rtf1\ansi\uc0'
     msg = (f"RTF documents are expected to start with '{expected}'\n"
-           f"\t\tStarts intead with '{result[:len(expected)]}'\n"
+           f"\t\tStarts instead with '{result[:len(expected)]}'\n"
            "\t(WARNING: Partial Output of Result!)")
     assert result.startswith(expected), msg
 
@@ -82,7 +82,7 @@ def test_rtf_footer():
     result = format_rtf(t)
     expected = ''
     msg = (f"RTF documents are expected to end with '{_escape(expected)}'\n"
-           f"\t\tEnds intead with '{_escape(result[-len(expected):])}'\n"
+           f"\t\tEnds instead with '{_escape(result[-len(expected):])}'\n"
            "\t(WARNING: Partial Output of Result!)")
     assert result.endswith(expected+foot), msg
 

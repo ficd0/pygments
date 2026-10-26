@@ -32,7 +32,7 @@ styleSelect.addEventListener('change', () => {
     if (!styles)
         // Worker has not loaded yet.
         return;
-    style.textContent = styles.get(styleSelect.value);
+    style.textContent = styles[styleSelect.value];
     updateCopyLink();
     updateContrastWarning();
 });
@@ -79,7 +79,9 @@ fileInputResetButton.addEventListener('click', () => {
 
 let styles;
 
-const highlightWorker = new Worker("/_static/demo-worker.js");
+const highlightWorker = new Worker(
+    `/_static/demo-worker.js?wheel=${encodeURIComponent(pygmentsWheelName)}`,
+    { type: 'module' });
 highlightWorker.onmessage = (msg) => {
     if (msg.data.loaded) {
         styles = msg.data.loaded.styles;
@@ -92,7 +94,7 @@ highlightWorker.onmessage = (msg) => {
         outputDiv.innerHTML = msg.data.html;
         codeHeader.hidden = false;
         loadingDiv.hidden = true;
-        style.textContent = styles.get(styleSelect.value);
+        style.textContent = styles[styleSelect.value];
     } else if (msg.data.tokens) {
         const table = document.createElement('table');
         table.className = 'tokens';
